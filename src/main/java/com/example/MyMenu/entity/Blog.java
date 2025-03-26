@@ -1,10 +1,10 @@
 package com.example.MyMenu.entity;
 
+import com.example.MyMenu.entity.images.FoodImage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +25,6 @@ public class Blog {
     private String description;
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> images;
+    private List<FoodImage> images;
 
 }

@@ -1,18 +1,16 @@
-package com.example.MyMenu.entity;
+package com.example.MyMenu.entity.images;
 
+import com.example.MyMenu.entity.Blog;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.lang.annotation.control.CodeGenerationHint;
-
-import java.util.List;
 
 @Entity(name = "image")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Image {
+public class FoodImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.example.MyMenu.entity;
+package com.example.MyMenu.entity.about;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @NotNull
-public class About {
+public class AboutWebSite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,5 @@
 package com.example.MyMenu.entity;
 
-import com.example.MyMenu.enums.AddressCity;
-import com.example.MyMenu.enums.AddressDistrict;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -28,7 +26,7 @@ public class UserDetails {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Restaurans> restaurantsName;
+    private List<Restaurants> restaurantsName;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Address> address;
