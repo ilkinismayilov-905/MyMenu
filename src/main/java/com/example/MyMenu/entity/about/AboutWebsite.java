@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @NotNull
-public class AboutWebSite {
+public class AboutWebsite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

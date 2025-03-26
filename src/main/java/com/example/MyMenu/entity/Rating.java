@@ -1,29 +1,26 @@
 package com.example.MyMenu.entity;
 
-import com.example.MyMenu.enums.MealTitle;
+import jakarta.annotation.security.DenyAll;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
-@Entity(name = "menu")
+@Entity(name = "rating")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Menu {
+public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String rate;
 
-    private String description;
+    @OneToOne
+    private UserEntity userId;
 
-    private BigDecimal price;
-
-    @Enumerated(value = EnumType.STRING)
-    private MealTitle title;
+    @OneToOne
+    private Restaurants restaurantId;
 }
