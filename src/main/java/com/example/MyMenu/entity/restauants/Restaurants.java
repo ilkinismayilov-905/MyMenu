@@ -1,9 +1,10 @@
-package com.example.MyMenu.entity;
+package com.example.MyMenu.entity.restauants;
 
 import com.example.MyMenu.entity.images.RestaurantsImage;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "restaurans")
@@ -23,7 +24,7 @@ public class Restaurants {
     private String workHours;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<RestaurantsImage> imageList;
+    private List<RestaurantsImage> imageList = new ArrayList<>();
 
 
 }

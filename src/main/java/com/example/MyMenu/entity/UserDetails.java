@@ -1,5 +1,6 @@
 package com.example.MyMenu.entity;
 
+import com.example.MyMenu.entity.restauants.Restaurants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;

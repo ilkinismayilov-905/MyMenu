@@ -1,4 +1,4 @@
-package com.example.MyMenu.entity;
+package com.example.MyMenu.entity.blogs;
 
 import com.example.MyMenu.entity.images.FoodImage;
 import jakarta.persistence.*;
@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "blog")
@@ -24,7 +25,11 @@ public class Blog {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodImage> images;
+    @OneToMany
+    private List<FoodImage> images = new ArrayList<>();
 
+    public Blog(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }

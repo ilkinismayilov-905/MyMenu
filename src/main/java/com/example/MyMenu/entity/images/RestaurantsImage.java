@@ -1,7 +1,6 @@
 package com.example.MyMenu.entity.images;
 
-import com.example.MyMenu.entity.Blog;
-import com.example.MyMenu.entity.Restaurants;
+import com.example.MyMenu.entity.restauants.Restaurants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +19,6 @@ public class RestaurantsImage {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false,length = 600)
+    @Column(nullable = false)
     private String imageUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id",nullable = false)
-    private Restaurants restaurants;
 }
