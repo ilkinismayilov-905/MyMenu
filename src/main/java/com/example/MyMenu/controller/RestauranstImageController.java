@@ -61,9 +61,6 @@ public class RestauranstImageController {
     public ResponseEntity<Optional<RestaurantsImage>> getImageById(@PathVariable Long id){
         Optional<RestaurantsImage> image = restaurantsImageServiceImpl.getById(id);
 
-        if(image.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         return ResponseEntity.ok(image);
     }
 
@@ -77,9 +74,6 @@ public class RestauranstImageController {
     public ResponseEntity<Optional<RestaurantsImage>> deleteById(@PathVariable Long id){
         Optional<RestaurantsImage> image = restaurantsImageServiceImpl.getById(id);
 
-        if(image.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         restaurantsImageServiceImpl.deleteById(id);
         return ResponseEntity.ok(image);
     }

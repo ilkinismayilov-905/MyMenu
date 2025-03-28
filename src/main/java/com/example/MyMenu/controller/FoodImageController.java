@@ -46,9 +46,7 @@ public class FoodImageController {
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<FoodImage>> getFoodImageById(@PathVariable Long id){
         Optional<FoodImage> foodImage = foodImageServiceImpl.getById(id);
-        if(foodImage.isEmpty()){
-            throw new RuntimeException("Error");
-        }
+
         return ResponseEntity.ok(foodImage);
     }
 
@@ -75,9 +73,6 @@ public class FoodImageController {
     public ResponseEntity<Optional<FoodImage>> deleteById(@PathVariable Long id){
         Optional<FoodImage> foodImage = foodImageServiceImpl.getById(id);
 
-        if(foodImage.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         foodImageServiceImpl.deleteById(id);
         return ResponseEntity.ok(foodImage);
     }

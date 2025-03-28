@@ -53,9 +53,7 @@ public class UserEntityController {
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<UserEntity>> getUserById(@PathVariable Long id){
         Optional<UserEntity> user = userEntityServiceImpl.getById(id);
-        if(user.isEmpty()){
-            throw new RuntimeException("Error");
-        }
+
         return ResponseEntity.ok(user);
     }
 
@@ -69,9 +67,6 @@ public class UserEntityController {
     public ResponseEntity<Optional<UserEntity>> getUserByUsername(@PathVariable String username){
         Optional<UserEntity> user = userEntityServiceImpl.getByUsername(username);
 
-        if(user.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         return ResponseEntity.ok(user);
     }
 
@@ -85,9 +80,6 @@ public class UserEntityController {
     public ResponseEntity<Optional<UserEntity>> getUserByEmail(@PathVariable String email){
         Optional<UserEntity> user = userEntityServiceImpl.getByEmail(email);
 
-        if(user.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         return ResponseEntity.ok(user);
     }
 }

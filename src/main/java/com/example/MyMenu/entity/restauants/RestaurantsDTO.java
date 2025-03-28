@@ -11,7 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class RestaurantsDTO {
 
-    private String title;
+    private String restaurantName;
     private String description;
+    private String workHours;
     private List<Long> imageIds;
 }

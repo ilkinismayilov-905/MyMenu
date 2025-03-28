@@ -54,9 +54,7 @@ public class BlogController {
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<Blog>> getById(@PathVariable Long id){
         Optional<Blog> blog = blogServiceImpl.getById(id);
-        if(blog.isEmpty()){
-            throw new RuntimeException("Error");
-        }
+
         return ResponseEntity.ok(blog);
     }
 
@@ -64,9 +62,7 @@ public class BlogController {
     @GetMapping("/title/{title}")
     public ResponseEntity<Optional<Blog>> getByTitle(@PathVariable String title){
         Optional<Blog> blog = blogServiceImpl.getByTitle(title);
-        if(blog.isEmpty()){
-            throw new RuntimeException("Error");
-        }
+
         return ResponseEntity.ok(blog);
     }
 
@@ -75,9 +71,6 @@ public class BlogController {
     public ResponseEntity<Optional<Blog>> deleteById(@PathVariable Long id){
         Optional<Blog> blog = blogServiceImpl.getById(id);
 
-        if(blog.isEmpty()){
-            throw new RuntimeException("Error");
-        }
         blogServiceImpl.deleteById(id);
         return ResponseEntity.ok(blog);
 

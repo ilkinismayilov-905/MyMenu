@@ -17,9 +17,10 @@ public class Restaurants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String restauransName;
+    @Column(name = "restaurant_name")
+    private String restaurantName;
 
-    private String Description;
+    private String description;
 
     private String workHours;
 
