@@ -25,8 +25,5 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private AddressDistrict district;
 
-    @ManyToOne
-    private UserDetails userDetails;
-
 
 }

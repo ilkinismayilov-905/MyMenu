@@ -1,8 +1,10 @@
 package com.example.MyMenu.service.impl;
 
+import com.example.MyMenu.entity.Address;
 import com.example.MyMenu.entity.images.RestaurantsImage;
 import com.example.MyMenu.entity.restauants.Restaurants;
 import com.example.MyMenu.entity.restauants.RestaurantsDTO;
+import com.example.MyMenu.repository.AddressRepository;
 import com.example.MyMenu.repository.RestaurantsImageRepository;
 import com.example.MyMenu.repository.RestaurantsRepository;
 import com.example.MyMenu.service.RestaurantsService;
@@ -19,11 +21,15 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 
     private final RestaurantsRepository restaurantsRepository;
     private final RestaurantsImageRepository restaurantsImageRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public RestaurantsServiceImpl(RestaurantsRepository restaurantsRepository,RestaurantsImageRepository restaurantsImageRepository) {
+    public RestaurantsServiceImpl(RestaurantsRepository restaurantsRepository,
+                                  RestaurantsImageRepository restaurantsImageRepository,
+                                  AddressRepository addressRepository) {
         this.restaurantsRepository = restaurantsRepository;
         this.restaurantsImageRepository = restaurantsImageRepository;
+        this.addressRepository=addressRepository;
     }
 
     @Override
@@ -57,24 +63,46 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 
     @Override
     public Restaurants create(RestaurantsDTO restaurantsDTO) {
-        Restaurants restaurants = new Restaurants();
-        restaurants.setDescription(restaurantsDTO.getDescription());
-        restaurants.setRestaurantName(restaurantsDTO.getRestaurantName());
-        restaurants.setWorkHours(restaurantsDTO.getWorkHours());
+        Restaurants restaurants = convertToEntity(restaurantsDTO);
 
-        List<RestaurantsImage> imageList = restaurantsImageRepository.findAllById(restaurantsDTO.getImageIds());
-        restaurants.setImageList(imageList);
-
-        Restaurants savedRestaurant = restaurantsRepository.save(restaurants);
-        return savedRestaurant;
+        return restaurantsRepository.save(restaurants);
     }
 
-//    public Optional<Restaurants> getByName(String restaurantName){
-//        Optional<Restaurants> restaurant = restaurantsRepository.findByName(restaurantName);
-//
-//        if(restaurant.isEmpty()){
-//            throw new RuntimeException("Error");
-//        }
-//        return restaurant;
-//    }
+    @Override
+    public Optional<Restaurants> updateById(Long id,RestaurantsDTO restaurantsDTO) {
+
+        return restaurantsRepository.findById(id).map(existingRestaurant ->{
+            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
+            updatedRestaurant.setId(existingRestaurant.getId());
+
+            return restaurantsRepository.save(updatedRestaurant);
+        });
+
+
+    }
+
+    public Optional<Restaurants> getByName(String restaurantName){
+        Optional<Restaurants> restaurant = restaurantsRepository.findByRestaurantName(restaurantName);
+
+        if(restaurant.isEmpty()){
+            throw new RuntimeException("Error");
+        }
+        return restaurant;
+    }
+
+    public Restaurants convertToEntity(RestaurantsDTO restaurantsDTO){
+        Restaurants restaurants = new Restaurants();
+        List<RestaurantsImage> imageList = restaurantsImageRepository.findAllById(restaurantsDTO.getImageIds());
+        List<Address> addressList = addressRepository.findAllById(restaurantsDTO.getAddressIds());
+        restaurants.setRestaurantName(restaurantsDTO.getRestaurantName());
+        restaurants.setDescription(restaurantsDTO.getDescription());
+        restaurants.setImageList(imageList);
+        restaurants.setAddressList(addressList);
+        restaurants.setWorkHours(restaurantsDTO.getWorkHours());
+
+        return restaurants;
+
+
+
+    }
 }

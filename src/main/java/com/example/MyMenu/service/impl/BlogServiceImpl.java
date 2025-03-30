@@ -66,6 +66,12 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog createBlog(BlogDTO blogDTO) {
+        Blog blog = convertToEntity(blogDTO);
+
+        return blogRepository.save(blog);
+    }
+
+    public Blog convertToEntity(BlogDTO blogDTO){
         Blog blog = new Blog();
         blog.setTitle(blogDTO.getTitle());
         blog.setDescription(blogDTO.getDescription());
@@ -73,8 +79,6 @@ public class BlogServiceImpl implements BlogService {
         List<FoodImage> imageList = foodImageRepository.findAllById(blogDTO.getImageIds());
         blog.setImages(imageList);
 
-
-        Blog savedBlog = blogRepository.save(blog);
-        return savedBlog;
+        return blog;
     }
 }

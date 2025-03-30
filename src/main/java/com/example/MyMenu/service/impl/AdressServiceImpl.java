@@ -1,6 +1,8 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.Address;
+import com.example.MyMenu.enums.AddressCity;
+import com.example.MyMenu.enums.AddressDistrict;
 import com.example.MyMenu.repository.AddressRepository;
 import com.example.MyMenu.service.AddressService;
 import jakarta.transaction.Transactional;
@@ -47,5 +49,23 @@ public class AdressServiceImpl implements AddressService {
     @Override
     public List<Address> getAll() {
         return addressRepository.findAll();
+    }
+
+    public List<Address> getByCity(AddressCity city){
+        List<Address> address = addressRepository.getByCity(city);
+
+        if(address.isEmpty()){
+            throw new RuntimeException("Error");
+        }
+        return address;
+    }
+
+    public List<Address> getByDistrict(AddressDistrict district){
+        List<Address> address = addressRepository.getByDistrict(district);
+
+        if(address.isEmpty()){
+            throw new RuntimeException("Error");
+        }
+        return address;
     }
 }

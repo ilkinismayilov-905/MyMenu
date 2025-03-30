@@ -15,4 +15,10 @@ public class RestaurantsDTO {
     private String description;
     private String workHours;
     private List<Long> imageIds;
+    private List<Long> addressIds;
+    private RestaurantsDTO restaurantsDTO;
+
+//    public RestaurantsDTO getAddress() {
+//        return restaurantsDTO;
+//    }
 }
