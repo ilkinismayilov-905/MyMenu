@@ -28,8 +28,6 @@ public class SupportEntity {
 
     private Long number;
 
-    @ManyToOne
-    private UserEntity adminUser;
 
 
 

@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/address")
 public class AddressController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AddressController.class);
 
     private final AdressServiceImpl adressServiceImpl;
 
@@ -37,7 +42,10 @@ public class AddressController {
     )
     @PostMapping("/add")
     public ResponseEntity<Address> addAddress(@RequestBody Address address){
+
        Address createdAddress = adressServiceImpl.save(address);
+
+
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
@@ -49,7 +57,12 @@ public class AddressController {
     )
     @GetMapping("/getAll")
     public ResponseEntity<List<Address>> getAll(){
-        return ResponseEntity.ok(adressServiceImpl.getAll());
+
+        List<Address> addressList = adressServiceImpl.getAll();
+
+        logger.info("GetAll address");
+
+        return ResponseEntity.ok(addressList);
     }
 
     @Operation(summary = "Get Address by Id")
@@ -60,7 +73,10 @@ public class AddressController {
     )
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<Address>> getById(@PathVariable Long id){
-        return ResponseEntity.ok(adressServiceImpl.getById(id));
+
+        Optional<Address> address = adressServiceImpl.getById(id);
+
+        return ResponseEntity.ok(address);
     }
 
     @Operation(summary = "Delete Address by Id")
