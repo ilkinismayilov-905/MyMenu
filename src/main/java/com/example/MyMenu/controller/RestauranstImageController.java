@@ -28,7 +28,7 @@ public class RestauranstImageController {
 
     @Operation(summary = "Add new RestaurantImage")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "RestaurantImage added"),
+            @ApiResponse(responseCode = "200" , description = "RestaurantImage is added"),
             @ApiResponse(responseCode = "404" , description = "RestaurantImage cannot added")
     }
     )
@@ -40,7 +40,7 @@ public class RestauranstImageController {
 
     @Operation(summary = "Get all RestaurantsImages")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "RestaurantImages found"),
+            @ApiResponse(responseCode = "200" , description = "RestaurantImages is found"),
             @ApiResponse(responseCode = "404" , description = "There is no RestaurantImages")
 
     }
@@ -52,7 +52,7 @@ public class RestauranstImageController {
 
     @Operation(summary = "Get RestaurantsImages by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "RestaurantImages found"),
+            @ApiResponse(responseCode = "200" , description = "RestaurantImages is found"),
             @ApiResponse(responseCode = "404" , description = "There is no RestaurantImages")
 
     }
@@ -66,8 +66,8 @@ public class RestauranstImageController {
 
     @Operation(summary = "Delete RestaurantImage by Id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "RestaurantImage deleted"),
-            @ApiResponse(responseCode = "404" , description = "RestaurantImage couldn't")
+            @ApiResponse(responseCode = "200" , description = "RestaurantImage is deleted"),
+            @ApiResponse(responseCode = "404" , description = "RestaurantImage couldn't deleted")
     }
     )
     @DeleteMapping("/delete/{id}")

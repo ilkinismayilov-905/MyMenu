@@ -1,13 +1,13 @@
 package com.example.MyMenu.repository;
 
-import com.example.MyMenu.entity.restauants.Restaurants;
+import com.example.MyMenu.entity.Restaurants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface RestaurantsRepository extends JpaRepository<Restaurants,Long> {
-    public Optional<Restaurants> findByRestaurantName(String restaurantName);
+    public List<Restaurants> findByRestaurantName(String restaurantName);
     public Restaurants getRestaurantById(Long id);
 }

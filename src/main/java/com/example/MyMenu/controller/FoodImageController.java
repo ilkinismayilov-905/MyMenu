@@ -26,7 +26,7 @@ public class FoodImageController {
 
     @Operation(summary = "Add new FoodImage")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "FoodImage added"),
+            @ApiResponse(responseCode = "200" , description = "FoodImage is added"),
             @ApiResponse(responseCode = "404" , description = "FoodImage cannot added")
     }
     )
@@ -38,7 +38,7 @@ public class FoodImageController {
 
     @Operation(summary = "Get FoodImage by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "FoodImage found"),
+            @ApiResponse(responseCode = "200" , description = "FoodImage is found"),
             @ApiResponse(responseCode = "404" , description = "FoodImage not found")
 
     }
@@ -52,7 +52,7 @@ public class FoodImageController {
 
     @Operation(summary = "Get all FoodImages")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "FoodImage found"),
+            @ApiResponse(responseCode = "200" , description = "FoodImage is found"),
             @ApiResponse(responseCode = "404" , description = "There is no FoodImage")
 
     }
@@ -64,7 +64,7 @@ public class FoodImageController {
 
     @Operation(summary = "Delete FoodImage by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "FoodImage deleted"),
+            @ApiResponse(responseCode = "200" , description = "FoodImage is deleted"),
             @ApiResponse(responseCode = "404" , description = "FoodImage couldn't deleted")
     }
     )

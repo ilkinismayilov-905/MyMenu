@@ -1,4 +1,4 @@
-package com.example.MyMenu.entity.restauants;
+package com.example.MyMenu.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,7 @@ public class RestaurantsDTO {
     private String workHours;
     private List<Long> imageIds;
     private List<Long> addressIds;
-    private RestaurantsDTO restaurantsDTO;
+    private List<Long> about;
 
 //    public RestaurantsDTO getAddress() {
 //        return restaurantsDTO;

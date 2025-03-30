@@ -1,4 +1,4 @@
-package com.example.MyMenu.entity.blogs;
+package com.example.MyMenu.entity;
 
 import com.example.MyMenu.entity.images.FoodImage;
 import jakarta.persistence.*;

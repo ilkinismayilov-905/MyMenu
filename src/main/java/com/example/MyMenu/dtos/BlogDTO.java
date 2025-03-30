@@ -1,4 +1,4 @@
-package com.example.MyMenu.entity.blogs;
+package com.example.MyMenu.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

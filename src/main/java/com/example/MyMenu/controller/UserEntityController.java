@@ -26,7 +26,7 @@ public class UserEntityController {
 
     @Operation(summary = "Get all users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Users found"),
+            @ApiResponse(responseCode = "200" , description = "Users is found"),
             @ApiResponse(responseCode = "404" , description = "There is no user")
 
     }
@@ -45,8 +45,8 @@ public class UserEntityController {
 
     @Operation(summary = "Get user by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "User found"),
-            @ApiResponse(responseCode = "404" , description = "User not found")
+            @ApiResponse(responseCode = "200" , description = "User is found"),
+            @ApiResponse(responseCode = "404" , description = "User is not found")
 
     }
     )
@@ -59,8 +59,8 @@ public class UserEntityController {
 
     @Operation(summary = "Get user by name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "User found by name"),
-            @ApiResponse(responseCode = "200" , description = "User not found by name")
+            @ApiResponse(responseCode = "200" , description = "User is found by name"),
+            @ApiResponse(responseCode = "200" , description = "User is not found by name")
     }
     )
     @GetMapping("/username/{username}")
@@ -72,8 +72,8 @@ public class UserEntityController {
 
     @Operation(summary = "Get user by email")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "User found by email"),
-            @ApiResponse(responseCode = "200" , description = "User not found by email")
+            @ApiResponse(responseCode = "200" , description = "User is found by email"),
+            @ApiResponse(responseCode = "200" , description = "User is not found by email")
     }
     )
     @GetMapping("/email/{email}")

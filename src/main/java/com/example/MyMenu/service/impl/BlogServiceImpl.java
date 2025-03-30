@@ -1,7 +1,7 @@
 package com.example.MyMenu.service.impl;
 
-import com.example.MyMenu.entity.blogs.Blog;
-import com.example.MyMenu.entity.blogs.BlogDTO;
+import com.example.MyMenu.entity.Blog;
+import com.example.MyMenu.dtos.BlogDTO;
 import com.example.MyMenu.entity.images.FoodImage;
 import com.example.MyMenu.repository.BlogRepository;
 import com.example.MyMenu.repository.FoodImageRepository;

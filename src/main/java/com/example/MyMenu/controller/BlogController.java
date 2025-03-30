@@ -1,7 +1,7 @@
 package com.example.MyMenu.controller;
 
-import com.example.MyMenu.entity.blogs.Blog;
-import com.example.MyMenu.entity.blogs.BlogDTO;
+import com.example.MyMenu.entity.Blog;
+import com.example.MyMenu.dtos.BlogDTO;
 import com.example.MyMenu.service.impl.BlogServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +27,7 @@ public class BlogController {
 
     @Operation(summary = "Get all foods")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Food found"),
+            @ApiResponse(responseCode = "200" , description = "Food is found"),
             @ApiResponse(responseCode = "404" , description = "There is no food")
 
     }
@@ -39,7 +39,7 @@ public class BlogController {
 
     @Operation(summary = "Add new food")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Food added"),
+            @ApiResponse(responseCode = "200" , description = "Food is added"),
             @ApiResponse(responseCode = "404" , description = "Food cannot added")
 
     }

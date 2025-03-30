@@ -1,9 +1,11 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.Address;
+import com.example.MyMenu.entity.about.AboutRestaurants;
 import com.example.MyMenu.entity.images.RestaurantsImage;
-import com.example.MyMenu.entity.restauants.Restaurants;
-import com.example.MyMenu.entity.restauants.RestaurantsDTO;
+import com.example.MyMenu.entity.Restaurants;
+import com.example.MyMenu.dtos.RestaurantsDTO;
+import com.example.MyMenu.repository.AboutRestaurantRepository;
 import com.example.MyMenu.repository.AddressRepository;
 import com.example.MyMenu.repository.RestaurantsImageRepository;
 import com.example.MyMenu.repository.RestaurantsRepository;
@@ -22,14 +24,17 @@ public class RestaurantsServiceImpl implements RestaurantsService {
     private final RestaurantsRepository restaurantsRepository;
     private final RestaurantsImageRepository restaurantsImageRepository;
     private final AddressRepository addressRepository;
+    private final AboutRestaurantRepository aboutRestaurantRepository;
 
     @Autowired
     public RestaurantsServiceImpl(RestaurantsRepository restaurantsRepository,
                                   RestaurantsImageRepository restaurantsImageRepository,
-                                  AddressRepository addressRepository) {
+                                  AddressRepository addressRepository,
+                                  AboutRestaurantRepository aboutRestaurantRepository) {
         this.restaurantsRepository = restaurantsRepository;
         this.restaurantsImageRepository = restaurantsImageRepository;
         this.addressRepository=addressRepository;
+        this.aboutRestaurantRepository=aboutRestaurantRepository;
     }
 
     @Override
@@ -71,18 +76,31 @@ public class RestaurantsServiceImpl implements RestaurantsService {
     @Override
     public Optional<Restaurants> updateById(Long id,RestaurantsDTO restaurantsDTO) {
 
-        return restaurantsRepository.findById(id).map(existingRestaurant ->{
+//        return restaurantsRepository.findById(id).map(existingRestaurant ->{
+//            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
+//            updatedRestaurant.setId(existingRestaurant.getId());
+//
+//            return restaurantsRepository.save(updatedRestaurant);
+//        });
+        if(restaurantsRepository.existsById(id)){
+            Optional<Restaurants> existingRestaurant = Optional.ofNullable(restaurantsRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id)));
             Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
-            updatedRestaurant.setId(existingRestaurant.getId());
 
-            return restaurantsRepository.save(updatedRestaurant);
-        });
+            updatedRestaurant.setId(existingRestaurant.get().getId());
+
+            return Optional.of(restaurantsRepository.save(updatedRestaurant));
+        }
+        else {
+            throw new IllegalArgumentException("Ids must not be null or empty");
+        }
+
 
 
     }
 
-    public Optional<Restaurants> getByName(String restaurantName){
-        Optional<Restaurants> restaurant = restaurantsRepository.findByRestaurantName(restaurantName);
+    public List<Restaurants> getByUserName(String restaurantName){
+        List<Restaurants> restaurant = restaurantsRepository.findByRestaurantName(restaurantName);
 
         if(restaurant.isEmpty()){
             throw new RuntimeException("Error");
@@ -94,11 +112,13 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         Restaurants restaurants = new Restaurants();
         List<RestaurantsImage> imageList = restaurantsImageRepository.findAllById(restaurantsDTO.getImageIds());
         List<Address> addressList = addressRepository.findAllById(restaurantsDTO.getAddressIds());
+        List<AboutRestaurants> about = aboutRestaurantRepository.findAllById(restaurantsDTO.getAbout());
         restaurants.setRestaurantName(restaurantsDTO.getRestaurantName());
         restaurants.setDescription(restaurantsDTO.getDescription());
         restaurants.setImageList(imageList);
         restaurants.setAddressList(addressList);
         restaurants.setWorkHours(restaurantsDTO.getWorkHours());
+        restaurants.setId(restaurants.getId());
 
         return restaurants;
 

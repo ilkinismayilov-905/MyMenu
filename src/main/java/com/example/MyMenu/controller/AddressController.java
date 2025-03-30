@@ -30,7 +30,7 @@ public class AddressController {
 
     @Operation(summary = "Add new address")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Address added"),
+            @ApiResponse(responseCode = "200" , description = "Address is added"),
             @ApiResponse(responseCode = "404" , description = "Address could not added")
 
     }
@@ -43,7 +43,7 @@ public class AddressController {
 
     @Operation(summary = "Get all Address")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Addresses found"),
+            @ApiResponse(responseCode = "200" , description = "Addresses is found"),
             @ApiResponse(responseCode = "404" , description = "There is no address")
     }
     )
@@ -54,7 +54,7 @@ public class AddressController {
 
     @Operation(summary = "Get Address by Id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Address found by ID"),
+            @ApiResponse(responseCode = "200" , description = "Address is found by ID"),
             @ApiResponse(responseCode = "404" , description = "There is no address by id")
     }
     )
@@ -65,7 +65,7 @@ public class AddressController {
 
     @Operation(summary = "Delete Address by Id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Address deleted by ID"),
+            @ApiResponse(responseCode = "200" , description = "Address is deleted by ID"),
             @ApiResponse(responseCode = "404" , description = "There is no address by id")
     }
     )
@@ -78,7 +78,7 @@ public class AddressController {
 
     @Operation(summary = "Get Address by City")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Address found by city"),
+            @ApiResponse(responseCode = "200" , description = "Address is found by city"),
             @ApiResponse(responseCode = "404" , description = "There is no address by city")
     }
     )
@@ -89,7 +89,7 @@ public class AddressController {
 
     @Operation(summary = "Get Address by District")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Address found by district"),
+            @ApiResponse(responseCode = "200" , description = "Address is found by district"),
             @ApiResponse(responseCode = "404" , description = "There is no address by district")
     }
     )

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name = "about_restaurant")
 @Data
 @AllArgsConstructor
@@ -18,8 +20,8 @@ public class AboutRestaurants {
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
-    private Facilities facilities;
+    private List<Facilities> facilities;
 
     @Enumerated(value = EnumType.STRING)
-    private SocialNetworks socialNetworks;
+    private List<SocialNetworks> socialNetworks;
 }

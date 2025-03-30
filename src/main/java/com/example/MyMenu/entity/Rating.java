@@ -1,6 +1,5 @@
 package com.example.MyMenu.entity;
 
-import com.example.MyMenu.entity.restauants.Restaurants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

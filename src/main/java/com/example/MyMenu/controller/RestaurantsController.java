@@ -1,9 +1,7 @@
 package com.example.MyMenu.controller;
 
-import com.example.MyMenu.entity.blogs.Blog;
-import com.example.MyMenu.entity.restauants.Restaurants;
-import com.example.MyMenu.entity.restauants.RestaurantsDTO;
-import com.example.MyMenu.service.impl.RestaurantsImageServiceImpl;
+import com.example.MyMenu.entity.Restaurants;
+import com.example.MyMenu.dtos.RestaurantsDTO;
 import com.example.MyMenu.service.impl.RestaurantsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,7 +28,7 @@ public class RestaurantsController {
 
     @Operation(summary = "Get all restaurants")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Restaurants found"),
+            @ApiResponse(responseCode = "200" , description = "Restaurants is found"),
             @ApiResponse(responseCode = "404" , description = "There is no restaurant")
 
     }
@@ -42,7 +40,7 @@ public class RestaurantsController {
 
     @Operation(summary = "Add new restaurant")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Restaurant added"),
+            @ApiResponse(responseCode = "200" , description = "Restaurant is added"),
             @ApiResponse(responseCode = "404" , description = "Restaurant could not added")
     }
     )
@@ -54,7 +52,7 @@ public class RestaurantsController {
 
     @Operation(summary = "Get restaurant by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Restaurant found by ID"),
+            @ApiResponse(responseCode = "200" , description = "Restaurant is found by ID"),
             @ApiResponse(responseCode = "404" , description = "Restaurans could not found by ID")
     }
     )
@@ -65,22 +63,22 @@ public class RestaurantsController {
         return ResponseEntity.ok(restaurants);
     }
 
-//    @Operation(summary = "Get restaurant by name")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200" , description = "Restaurant found by name"),
-//            @ApiResponse(responseCode = "404" , description = "Restaurant could not found by name")
-//    }
-//    )
-//    @GetMapping("/name/{name}")
-//    public ResponseEntity<Optional<Restaurants>> findByName(@PathVariable String restaurantName){
-//        Optional<Restaurants> restaurants = restaurantsServiceImpl.getByName(restaurantName);
-//
-//        return ResponseEntity.ok(restaurants);
-//    }
+    @Operation(summary = "Get restaurant by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Restaurant is found by name"),
+            @ApiResponse(responseCode = "404" , description = "Restaurant could not found by name")
+    }
+    )
+    @GetMapping("/restaurantName/{restaurantName}")
+    public ResponseEntity<List<Restaurants>> findByName(@PathVariable String restaurantName){
+        List<Restaurants> restaurants = restaurantsServiceImpl.getByUserName(restaurantName);
+
+        return ResponseEntity.ok(restaurants);
+    }
 
     @Operation(summary = "Delete restaurant by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Restaurant deleted by ID"),
+            @ApiResponse(responseCode = "200" , description = "Restaurant is deleted by ID"),
             @ApiResponse(responseCode = "404" , description = "Restaurant could not deleted by ID")
     }
     )
@@ -89,6 +87,21 @@ public class RestaurantsController {
         Optional<Restaurants> restaurants = restaurantsServiceImpl.getById(id);
 
         restaurantsServiceImpl.deleteById(id);
+        return ResponseEntity.ok(restaurants);
+    }
+
+    //error
+    @Operation(summary = "Update restaurant by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Restaurant is updated"),
+            @ApiResponse(responseCode = "404" , description = "Restaurant could not updated")
+
+    }
+    )
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Optional<Restaurants>> updateById(@PathVariable Long id,@RequestBody RestaurantsDTO restaurantsDTO){
+        Optional<Restaurants> restaurants = restaurantsServiceImpl.updateById(id,restaurantsDTO);
+
         return ResponseEntity.ok(restaurants);
     }
 

@@ -1,7 +1,7 @@
 package com.example.MyMenu.service;
 
-import com.example.MyMenu.entity.restauants.Restaurants;
-import com.example.MyMenu.entity.restauants.RestaurantsDTO;
+import com.example.MyMenu.entity.Restaurants;
+import com.example.MyMenu.dtos.RestaurantsDTO;
 
 import java.util.Optional;
 
