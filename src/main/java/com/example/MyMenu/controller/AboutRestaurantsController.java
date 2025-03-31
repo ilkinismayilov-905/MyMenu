@@ -10,6 +10,8 @@ import com.example.MyMenu.service.impl.AboutRestaurantServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/aboutRestaurants")
 public class AboutRestaurantsController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AboutRestaurantsController.class);
 
     private final AboutRestaurantServiceImpl aboutRestaurantServiceImpl;
 
@@ -37,6 +41,7 @@ public class AboutRestaurantsController {
     )
     @PostMapping("/add")
     public ResponseEntity<AboutRestaurants> add(@RequestBody AboutRestaurants aboutRestaurants){
+        logger.info("Successfully added");
         return ResponseEntity.ok(aboutRestaurantServiceImpl.save(aboutRestaurants));
     }
 
@@ -48,6 +53,7 @@ public class AboutRestaurantsController {
     )
     @GetMapping("/getAll")
     public ResponseEntity<List<AboutRestaurants>> getAll(){
+        logger.info("Get all ");
         return ResponseEntity.ok(aboutRestaurantServiceImpl.getAll());
     }
 
@@ -59,6 +65,7 @@ public class AboutRestaurantsController {
     )
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<AboutRestaurants>> getById(@PathVariable Long id){
+        logger.info("AboutRestaurant is found successfully by id");
         return ResponseEntity.ok(aboutRestaurantServiceImpl.getById(id));
     }
 

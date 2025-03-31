@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/login")
 public class UserEntityController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserEntityController.class);
 
     private final UserEntityServiceImpl userEntityServiceImpl;
 
@@ -31,7 +35,7 @@ public class UserEntityController {
 
     }
     )
-    @GetMapping("/allUsers")
+    @GetMapping("/getAll")
     public ResponseEntity<List<UserEntity>> getAll(){
         return ResponseEntity.ok(userEntityServiceImpl.getAll());
     }

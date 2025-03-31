@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/foodImage")
 public class FoodImageController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FoodImageController.class);
+
     private final FoodImageServiceImpl foodImageServiceImpl;
 
     @Autowired

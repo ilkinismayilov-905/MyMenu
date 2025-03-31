@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "about")
 @Data
 @AllArgsConstructor
-@NotNull
+@NoArgsConstructor
 public class AboutWebsite {
 
     @Id
