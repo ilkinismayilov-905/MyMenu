@@ -34,6 +34,9 @@ public class Restaurants {
    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<AboutRestaurants> about = new ArrayList<>();
 
+   @OneToMany
+    private List<Rating> ratings = new ArrayList<>();
+
 
 
 }

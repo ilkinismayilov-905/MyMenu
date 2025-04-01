@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "about_restaurant")
 @Data
@@ -19,9 +20,12 @@ public class AboutRestaurants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(value = EnumType.STRING)
-    private List<Facilities> facilities;
 
+    @ElementCollection(targetClass = Facilities.class)
     @Enumerated(value = EnumType.STRING)
-    private List<SocialNetworks> socialNetworks;
+    private Set<Facilities> facilities;
+
+    @ElementCollection(targetClass = SocialNetworks.class)
+    @Enumerated(value = EnumType.STRING)
+    private Set<SocialNetworks> socialNetworks;
 }

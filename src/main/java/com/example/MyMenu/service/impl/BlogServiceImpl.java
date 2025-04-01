@@ -3,6 +3,9 @@ package com.example.MyMenu.service.impl;
 import com.example.MyMenu.entity.Blog;
 import com.example.MyMenu.dtos.BlogDTO;
 import com.example.MyMenu.entity.images.FoodImage;
+import com.example.MyMenu.exceptions.EmptyListException;
+import com.example.MyMenu.exceptions.NoEntityByIdException;
+import com.example.MyMenu.exceptions.NoEntityByTitleEcxeption;
 import com.example.MyMenu.repository.BlogRepository;
 import com.example.MyMenu.repository.FoodImageRepository;
 import com.example.MyMenu.service.BlogService;
@@ -41,25 +44,30 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public Optional<Blog> getById(Long id) {
+    public Optional<Blog> getById(Long id)  throws NoEntityByIdException{
         Optional<Blog> blog = blogRepository.findById(id);
 
         if(blog.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByIdException(id);
         }
         return blog;
     }
 
     @Override
-    public List<Blog> getAll() {
-        return blogRepository.findAll();
+    public List<Blog> getAll() throws EmptyListException  {
+
+        List<Blog> list = blogRepository.findAll();
+        if(list.isEmpty()){
+            throw new EmptyListException();
+        }
+        return list;
     }
 
-    public Optional<Blog> getByTitle(String title){
+    public Optional<Blog> getByTitle(String title)throws NoEntityByTitleEcxeption{
         Optional<Blog> blog = blogRepository.getByTitle(title);
 
         if (blog.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByTitleEcxeption(title);
         }
         return blog;
     }

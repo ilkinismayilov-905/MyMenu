@@ -1,10 +1,13 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.UserEntity;
+import com.example.MyMenu.exceptions.EmptyListException;
+import com.example.MyMenu.exceptions.NoEntityByEmailException;
+import com.example.MyMenu.exceptions.NoEntityByIdException;
+import com.example.MyMenu.exceptions.NoEntityByNameException;
 import com.example.MyMenu.repository.UserEntityRepository;
 import com.example.MyMenu.service.UserEntityService;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +28,11 @@ public class UserEntityServiceImpl implements UserEntityService {
 
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws NoEntityByIdException{
         if(userEntityRepository.existsById(id)){
             userEntityRepository.deleteById(id);
+        }else {
+            throw new NoEntityByIdException(id);
         }
 
     }
@@ -38,34 +43,39 @@ public class UserEntityServiceImpl implements UserEntityService {
     }
 
     @Override
-    public Optional<UserEntity> getById(Long id) {
+    public Optional<UserEntity> getById(Long id) throws NoEntityByIdException {
         Optional<UserEntity> user = userEntityRepository.findById(id);
 
         if(user.isEmpty()){
-            throw new RuntimeException("There is no user");
+            throw new NoEntityByIdException(id);
         }
         return user;
     }
 
     @Override
-    public List<UserEntity> getAll() {
-        return userEntityRepository.findAll();
+    public List<UserEntity> getAll() throws EmptyListException {
+        List<UserEntity> list = userEntityRepository.findAll();
+
+        if(list.isEmpty()){
+            throw new EmptyListException();
+        }
+        return list;
     }
 
-    public Optional<UserEntity> getByUsername(String username){
+    public Optional<UserEntity> getByUsername(String username) throws NoEntityByNameException{
         Optional<UserEntity> user = userEntityRepository.getByUsername(username);
 
         if(user.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByNameException(username);
         }
         return user;
     }
 
-    public Optional<UserEntity> getByEmail(String email){
+    public Optional<UserEntity> getByEmail(String email) throws NoEntityByEmailException{
         Optional<UserEntity> user = userEntityRepository.getByEmail(email);
 
         if(user.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByEmailException(email);
         }
         return user;
     }

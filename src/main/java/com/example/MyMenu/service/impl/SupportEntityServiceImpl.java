@@ -1,6 +1,8 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.SupportEntity;
+import com.example.MyMenu.exceptions.EmptyListException;
+import com.example.MyMenu.exceptions.NoEntityByIdException;
 import com.example.MyMenu.repository.SupportEntityRepository;
 import com.example.MyMenu.service.SupportEntityService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,9 +25,11 @@ public class SupportEntityServiceImpl implements SupportEntityService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws NoEntityByIdException {
         if(supportEntityRepository.existsById(id)){
             supportEntityRepository.deleteById(id);
+        }else {
+            throw new NoEntityByIdException(id);
         }
 
     }
@@ -36,18 +40,23 @@ public class SupportEntityServiceImpl implements SupportEntityService {
     }
 
     @Override
-    public Optional<SupportEntity> getById(Long id) {
+    public Optional<SupportEntity> getById(Long id) throws NoEntityByIdException {
         Optional<SupportEntity> supportEntity = supportEntityRepository.findById(id);
 
         if(supportEntity.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByIdException(id);
         }
 
         return supportEntity;
     }
 
     @Override
-    public List<SupportEntity> getAll() {
-        return supportEntityRepository.findAll();
+    public List<SupportEntity> getAll() throws EmptyListException  {
+        List<SupportEntity> list = supportEntityRepository.findAll();
+
+        if(list.isEmpty()){
+            throw new EmptyListException();
+        }
+        return list;
     }
 }

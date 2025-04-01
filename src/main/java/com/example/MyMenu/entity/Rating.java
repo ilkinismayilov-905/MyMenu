@@ -15,11 +15,11 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String rate;
+    private Integer ratingScore;
 
-    @OneToOne
+    @ManyToOne
     private UserEntity userId;
 
-    @OneToOne
+    @ManyToOne
     private Restaurants restaurantId;
 }

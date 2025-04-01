@@ -1,7 +1,9 @@
 package com.example.MyMenu.service.impl;
 
+
 import com.example.MyMenu.entity.about.AboutWebsite;
-import com.example.MyMenu.repository.AboutRestaurantRepository;
+import com.example.MyMenu.exceptions.EmptyListException;
+import com.example.MyMenu.exceptions.NoEntityByIdException;
 import com.example.MyMenu.repository.AboutWebsiteRepository;
 import com.example.MyMenu.service.AboutWebsiteService;
 import jakarta.transaction.Transactional;
@@ -25,10 +27,12 @@ public class AboutWebsiteServiceImpl implements AboutWebsiteService {
 
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws NoEntityByIdException {
         if(aboutWebsiteRepository.existsById(id)){
 
             aboutWebsiteRepository.deleteById(id);
+        }else {
+            throw new NoEntityByIdException(id);
         }
     }
 
@@ -38,17 +42,22 @@ public class AboutWebsiteServiceImpl implements AboutWebsiteService {
     }
 
     @Override
-    public Optional<AboutWebsite> getById(Long id) {
+    public Optional<AboutWebsite> getById(Long id) throws NoEntityByIdException {
         Optional<AboutWebsite> website = aboutWebsiteRepository.findById(id);
 
         if(website.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByIdException(id);
         }
         return website;
     }
 
     @Override
-    public List<AboutWebsite> getAll() {
-        return aboutWebsiteRepository.findAll();
+    public List<AboutWebsite> getAll()  throws EmptyListException {
+
+        List<AboutWebsite> list =aboutWebsiteRepository.findAll();
+        if(list.isEmpty()){
+            throw new EmptyListException();
+        }
+        return list;
     }
 }

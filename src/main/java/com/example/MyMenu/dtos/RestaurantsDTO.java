@@ -17,6 +17,7 @@ public class RestaurantsDTO {
     private List<Long> imageIds;
     private List<Long> addressIds;
     private List<Long> about;
+    private List<Long> ratingIds;
 
 //    public RestaurantsDTO getAddress() {
 //        return restaurantsDTO;

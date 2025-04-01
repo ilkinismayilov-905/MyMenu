@@ -1,6 +1,8 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.images.RestaurantsImage;
+import com.example.MyMenu.exceptions.EmptyListException;
+import com.example.MyMenu.exceptions.NoEntityByIdException;
 import com.example.MyMenu.repository.RestaurantsImageRepository;
 import com.example.MyMenu.service.RestaurantsImageService;
 import jakarta.transaction.Transactional;
@@ -22,9 +24,11 @@ public class RestaurantsImageServiceImpl implements RestaurantsImageService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws NoEntityByIdException {
         if(restaurantsImageRepository.existsById(id)){
             restaurantsImageRepository.deleteById(id);
+        }else {
+            throw new NoEntityByIdException(id);
         }
     }
 
@@ -34,18 +38,23 @@ public class RestaurantsImageServiceImpl implements RestaurantsImageService {
     }
 
     @Override
-    public Optional<RestaurantsImage> getById(Long id) {
+    public Optional<RestaurantsImage> getById(Long id) throws NoEntityByIdException {
         Optional<RestaurantsImage> image = restaurantsImageRepository.findById(id);
 
         if(image.isEmpty()){
-            throw new RuntimeException("Error");
+            throw new NoEntityByIdException(id);
         }
 
         return image;
     }
 
     @Override
-    public List<RestaurantsImage> getAll() {
-        return restaurantsImageRepository.findAll();
+    public List<RestaurantsImage> getAll() throws EmptyListException {
+        List<RestaurantsImage> list = restaurantsImageRepository.findAll();
+
+        if(list.isEmpty()){
+            throw new EmptyListException();
+        }
+        return list;
     }
 }
