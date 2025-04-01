@@ -56,9 +56,8 @@ public class UserEntityController {
     )
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<UserEntity>> getUserById(@PathVariable Long id){
-        Optional<UserEntity> user = userEntityServiceImpl.getById(id);
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userEntityServiceImpl.getById(id));
     }
 
     @Operation(summary = "Get user by name")
