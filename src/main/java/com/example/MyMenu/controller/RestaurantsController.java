@@ -95,19 +95,19 @@ public class RestaurantsController {
     }
 
     //error
-    @Operation(summary = "Update restaurant by ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Restaurant is updated"),
-            @ApiResponse(responseCode = "404" , description = "Restaurant could not updated")
-
-    }
-    )
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Restaurants>> updateById(@PathVariable Long id,@RequestBody RestaurantsDTO restaurantsDTO){
-        Optional<Restaurants> restaurants = restaurantsServiceImpl.updateById(id,restaurantsDTO);
-
-        return ResponseEntity.ok(restaurants);
-    }
+//    @Operation(summary = "Update restaurant by ID")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200" , description = "Restaurant is updated"),
+//            @ApiResponse(responseCode = "404" , description = "Restaurant could not updated")
+//
+//    }
+//    )
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<Optional<Restaurants>> updateById(@PathVariable Long id,@RequestBody RestaurantsDTO restaurantsDTO){
+//        Optional<Restaurants> restaurants = restaurantsServiceImpl.updateById(id,restaurantsDTO);
+//
+//        return ResponseEntity.ok(restaurants);
+//    }
 
 
 

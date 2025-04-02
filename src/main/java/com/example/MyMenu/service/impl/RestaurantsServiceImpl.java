@@ -1,7 +1,7 @@
 package com.example.MyMenu.service.impl;
 
 import com.example.MyMenu.entity.Address;
-import com.example.MyMenu.entity.Rating;
+//import com.example.MyMenu.entity.Rating;
 import com.example.MyMenu.entity.about.AboutRestaurants;
 import com.example.MyMenu.entity.images.RestaurantsImage;
 import com.example.MyMenu.entity.Restaurants;
@@ -26,19 +26,17 @@ public class RestaurantsServiceImpl implements RestaurantsService {
     private final RestaurantsImageRepository restaurantsImageRepository;
     private final AddressRepository addressRepository;
     private final AboutRestaurantRepository aboutRestaurantRepository;
-    private final RatingRepository ratingRepository;
+//    private final RatingRepository ratingRepository;
 
     @Autowired
     public RestaurantsServiceImpl(RestaurantsRepository restaurantsRepository,
                                   RestaurantsImageRepository restaurantsImageRepository,
                                   AddressRepository addressRepository,
-                                  AboutRestaurantRepository aboutRestaurantRepository,
-                                  RatingRepository ratingRepository) {
+                                  AboutRestaurantRepository aboutRestaurantRepository) {
         this.restaurantsRepository = restaurantsRepository;
         this.restaurantsImageRepository = restaurantsImageRepository;
         this.addressRepository=addressRepository;
         this.aboutRestaurantRepository=aboutRestaurantRepository;
-        this.ratingRepository=ratingRepository;
     }
 
     @Override
@@ -86,31 +84,29 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         return restaurantsRepository.save(restaurants);
     }
 
-    @Override
-    public Optional<Restaurants> updateById(Long id,RestaurantsDTO restaurantsDTO) throws NoEntityByIdException {
-
-//        return restaurantsRepository.findById(id).map(existingRestaurant ->{
-//            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
-//            updatedRestaurant.setId(existingRestaurant.getId());
+//    @Override
+//    public Optional<Restaurants> updateById(Long id,RestaurantsDTO restaurantsDTO) throws NoEntityByIdException {
 //
-//            return restaurantsRepository.save(updatedRestaurant);
-//        });
-        if(restaurantsRepository.existsById(id)){
-            Optional<Restaurants> existingRestaurant = Optional.ofNullable(restaurantsRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id)));
-            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
-
-            updatedRestaurant.setId(existingRestaurant.get().getId());
-
-            return Optional.of(restaurantsRepository.save(updatedRestaurant));
-        }
-        else {
-            throw new NoEntityByIdException(id);
-        }
-
-
-
-    }
+////        return restaurantsRepository.findById(id).map(existingRestaurant ->{
+////            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
+////            updatedRestaurant.setId(existingRestaurant.getId());
+////
+////            return restaurantsRepository.save(updatedRestaurant);
+////        });
+//        if(restaurantsRepository.existsById(id)){
+//            Optional<Restaurants> existingRestaurant = Optional.ofNullable(restaurantsRepository.findById(id)
+//                    .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id)));
+//            Restaurants updatedRestaurant = convertToEntity(restaurantsDTO);
+//
+//            updatedRestaurant.setId(existingRestaurant.get().getId());
+//
+//            return Optional.of(restaurantsRepository.save(updatedRestaurant));
+//        }
+//        else {
+//            throw new NoEntityByIdException(id);
+//        }
+//
+//    }
 
     public List<Restaurants> getByUserName(String restaurantName)throws NoEntityByNameException{
         List<Restaurants> restaurant = restaurantsRepository.findByRestaurantName(restaurantName);
@@ -126,13 +122,13 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         List<RestaurantsImage> imageList = restaurantsImageRepository.findAllById(restaurantsDTO.getImageIds());
         List<Address> addressList = addressRepository.findAllById(restaurantsDTO.getAddressIds());
         List<AboutRestaurants> about = aboutRestaurantRepository.findAllById(restaurantsDTO.getAbout());
-        List<Rating> ratings = ratingRepository.findAllById(restaurantsDTO.getRatingIds());
+//        List<Rating> ratings = ratingRepository.findAllById(restaurantsDTO.getRatingIds());
         restaurants.setRestaurantName(restaurantsDTO.getRestaurantName());
         restaurants.setDescription(restaurantsDTO.getDescription());
         restaurants.setImageList(imageList);
         restaurants.setAddressList(addressList);
         restaurants.setAbout(about);
-        restaurants.setRatings(ratings);
+//        restaurants.setRatings(ratings);
         restaurants.setWorkHours(restaurantsDTO.getWorkHours());
         restaurants.setId(restaurants.getId());
 

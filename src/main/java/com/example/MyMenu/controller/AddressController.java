@@ -51,7 +51,7 @@ public class AddressController {
 
     @Operation(summary = "Get all Address")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200" , description = "Addresses is found"),
+            @ApiResponse(responseCode = "200" , description = "Addresses are found"),
             @ApiResponse(responseCode = "404" , description = "There is no address")
     }
     )
@@ -61,6 +61,7 @@ public class AddressController {
         List<Address> addressList = adressServiceImpl.getAll();
 
         logger.info("GetAll address");
+
 
         return ResponseEntity.ok(addressList);
     }
