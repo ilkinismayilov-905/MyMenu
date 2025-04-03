@@ -15,6 +15,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity(name = "user_entity")
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
@@ -30,19 +31,22 @@ public class UserEntity {
 
     private String password;
 
+    private String authorities;
+
 //    @OneToMany
 //    private List<Rating> ratings;
 
-    @JsonCreator
-    public UserEntity(@JsonProperty("id") Long id,
-                      @JsonProperty("username") String username,
-                      @JsonProperty("email") String email,
-                      @JsonProperty("password") String password) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+//    @JsonCreator
+//    public UserEntity(@JsonProperty("id") Long id,
+//                      @JsonProperty("username") String username,
+//                      @JsonProperty("email") String email,
+//                      @JsonProperty("password") String password
+//    ) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
 
     public Long getId() {
         return id;
@@ -74,5 +78,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
     }
 }
