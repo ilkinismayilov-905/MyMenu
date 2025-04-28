@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +21,15 @@ import java.util.Optional;
 public class UserEntityController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserEntityController.class);
+    private final PasswordEncoder passwordEncoder;
 
     private final UserEntityServiceImpl userEntityServiceImpl;
 
     @Autowired
-    public UserEntityController(UserEntityServiceImpl userEntityServiceImpl) {
+    public UserEntityController(UserEntityServiceImpl userEntityServiceImpl,
+                                PasswordEncoder passwordEncoder) {
         this.userEntityServiceImpl = userEntityServiceImpl;
+        this.passwordEncoder=passwordEncoder;
     }
 
     @Operation(summary = "Get all users")
@@ -43,6 +47,7 @@ public class UserEntityController {
     @Operation(summary = "Create user")
     @PostMapping("/add")
     public ResponseEntity<UserEntity> createUser(@Valid @RequestBody UserEntity user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userEntityServiceImpl.save(user);
         return ResponseEntity.ok().build();
     }
