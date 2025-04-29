@@ -1,16 +1,45 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:latest
+    container_name: mymenu-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mymenu
+      POSTGRES_DB: postgres
+    ports:
+      - "5430:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - mymenu-backend
+
   backend:
-    image: ghcr.io/${GITHUB_REPO_OWNER}/mymenu-backend:${TAG}
+#    image: ghcr.io/${GITHUB_REPO_OWNER}/mymenu-backend:${TAG}
+    build:
+     context: .
+     dockerfile: Dockerfile
     container_name: ilkin-mymenu-backend-dev
     ports:
       - "8083:8081"  # Expose port 8080 of backend to port 8098 of the host
     environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=mymenu
       - SPRING_PROFILES_ACTIVE=dev  # Set profile to dev
+    depends_on:
+      - db
     networks:
       - mymenu-dev-network
+      - mymenu-backend
 
 networks:
+  mymenu-backend:
+    driver: bridge
   mymenu-dev-network:
     driver: bridge
+
+volumes:
+  db-data:
+        driver: local

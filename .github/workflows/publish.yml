@@ -47,7 +47,7 @@ jobs:
             echo "${{ secrets.DEV_SERVER_PRIVATE_KEY }}" > $HOME/.ssh/private_key
             echo "SERVER_USER=${{ secrets.DEV_SERVER_USER }}" >> $GITHUB_ENV
             echo "SERVER_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV
-            echo "SERVER_PORT=${{ secrets.DEV_SERVER_PORT }}" >> $GITHUB_ENV
+              echo "SERVER_PORT=${{ secrets.DEV_SERVER_PORT }}" >> $GITHUB_ENV
             echo "TAG=dev" >> $GITHUB_ENV
           fi          
           chmod 600 $HOME/.ssh/private_key
