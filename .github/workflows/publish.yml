@@ -78,6 +78,7 @@ jobs:
             echo "GITHUB_REPO_OWNER: ${GITHUB_REPO_OWNER}"
             echo "IMAGE_TAG: ${IMAGE_TAG}"
 
+
       - name: Deploy via SSH
         run: |
           ssh -i $HOME/.ssh/private_key -p $SERVER_PORT -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST <<EOF
