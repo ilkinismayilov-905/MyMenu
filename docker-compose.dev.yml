@@ -22,7 +22,7 @@ services:
 #     dockerfile: Dockerfile
     container_name: ilkin-mymenu-backend-dev
     ports:
-      - "8083:8081"  # Expose port 8080 of backend to port 8098 of the host
+      - "8083:8083"  # Expose port 8080 of backend to port 8098 of the host
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
