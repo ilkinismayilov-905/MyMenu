@@ -16,7 +16,7 @@ services:
       - mymenu-backend
 
   backend:
-#    image: ghcr.io/${GITHUB_REPO_OWNER}/mymenu-backend:${TAG}
+    image: ghcr.io/${GITHUB_REPO_OWNER}/mymenu-backend:${TAG}
     build:
      context: .
      dockerfile: Dockerfile
