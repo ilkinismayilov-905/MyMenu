@@ -32,6 +32,12 @@ public class UserEntityController {
         this.passwordEncoder=passwordEncoder;
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<?> getHello(){
+
+        return ResponseEntity.ok("Hello World");
+    }
+
     @Operation(summary = "Get all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200" , description = "Users is found"),
