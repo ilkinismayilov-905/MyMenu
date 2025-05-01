@@ -16,10 +16,10 @@ services:
       - mymenu-backend
 
   backend:
-    image: ghcr.io/${GITHUB_REPO_OWNER}/ilkin-mymenu-backend:${TAG}
-#    build:
-#     context: .
-#     dockerfile: Dockerfile
+#    image: ghcr.io/${GITHUB_REPO_OWNER}/ilkin-mymenu-backend:${TAG}
+    build:
+     context: .
+     dockerfile: Dockerfile
     container_name: ilkin-mymenu-backend-dev
     ports:
       - "8083:8083"  # Expose port 8083 of backend to port 8083 of the host
